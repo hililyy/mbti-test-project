@@ -1,0 +1,83 @@
+package com.webPro03;
+
+import java.sql.*;
+import java.util.*;
+import com.webPro03.*;
+
+public class UserInfo {
+	
+	private Connection con;
+	
+	private static final String username = "root";
+	private static final String password = "12345678";
+	private static final String url = "jdbc:mysql://localhost:3306/web?serverTimezone=UTC";
+	
+	public UserInfo() {
+		try {
+			
+			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			con=DriverManager.getConnection(url, username, password);
+			
+		}catch(SQLException ex) {
+			System.out.println("SQLException"+ex);
+		}catch(Exception e) {
+			System.out.println("Fail");
+			System.out.println("Exception"+e);
+			System.out.println("exit");
+		}
+    }
+	
+	public void signIn(Map<String, Object> map) { 
+        
+		String sql = "insert into userInfo(id,password,gender,phone) values(?,?,?,?);";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, (String) map.get("id"));
+            pstmt.setString(2, (String) map.get("password"));
+            pstmt.setInt(3, (int)map.get("gender"));
+            pstmt.setString(4, (String) map.get("phone"));
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null && !pstmt.isClosed())
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+	
+	public UserDTO signUp(Map<String, String> map) throws SQLException { 
+        
+		String sql = "select * from userInfo where id = ? and password = ?;";
+        PreparedStatement pstmt = null;
+        UserDTO re = new UserDTO();
+        try {
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, map.get("id"));
+            pstmt.setString(2, map.get("password"));
+            ResultSet rs = pstmt.executeQuery();
+ 
+            if (rs.next()) {
+            	System.out.println(rs.toString());
+            	re.setId(rs.getString("id"));
+            	re.setPassword(rs.getString("password"));
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null && !pstmt.isClosed())
+                    pstmt.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return re;
+    }
+}
