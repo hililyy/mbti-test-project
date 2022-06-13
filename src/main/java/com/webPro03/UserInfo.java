@@ -23,34 +23,10 @@ public class UserInfo {
 		}catch(Exception e) {
 			System.out.println("Fail");
 			System.out.println("Exception"+e);
-			System.out.println("exit");
 		}
     }
 	
-	public void signIn(Map<String, Object> map) { 
-        
-		String sql = "insert into userInfo(id,password,gender,phone) values(?,?,?,?);";
-        PreparedStatement pstmt = null;
-        try {
-            pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, (String) map.get("id"));
-            pstmt.setString(2, (String) map.get("password"));
-            pstmt.setInt(3, (int)map.get("gender"));
-            pstmt.setString(4, (String) map.get("phone"));
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (pstmt != null && !pstmt.isClosed())
-                    pstmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-	
-	public UserDTO signUp(Map<String, String> map) throws SQLException { 
+	public UserDTO signIn(Map<String, String> map) throws SQLException { 
         
 		String sql = "select * from userInfo where id = ? and password = ?;";
         PreparedStatement pstmt = null;
@@ -80,4 +56,46 @@ public class UserInfo {
         }
         return re;
     }
+	
+	public void setMBTI(Map<String, String> map) { 
+		String sql = "update userInfo set mbti=? where id=?";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, (String) map.get("MBTI"));
+            pstmt.setString(2, (String) map.get("userId"));
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null && !pstmt.isClosed())
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+	public void signUp(Map<String, Object> map) {
+		String sql = "insert into userInfo(id,password,gender,phone) values(?,?,?,?);";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, (String) map.get("userId"));
+            pstmt.setString(2, (String) map.get("password"));
+            pstmt.setInt(3, (int)map.get("gender"));
+            pstmt.setString(4, (String) map.get("phone"));
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null && !pstmt.isClosed())
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+	}
 }

@@ -8,7 +8,28 @@ public class UserBean {
 	
 	private String userId;
 	private String password;
+	private String phone;
+	private String mbti;
+	private int gender;
 	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getMbti() {
+		return mbti;
+	}
+	public void setMbti(String mbti) {
+		this.mbti = mbti;
+	}
+	public int getGender() {
+		return gender;
+	}
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
 	public UserBean() {
 		super();
 	}
@@ -29,14 +50,27 @@ public class UserBean {
 		setPassword(null);
 	}
 	
-	public UserDTO signUp() throws SQLException {
+	public UserDTO signIn() throws SQLException {
 		UserInfo userInfo = new UserInfo();
 		
-		Map<String,String> signUpData = new HashMap<>();
-		signUpData.put("id", this.userId);
-		signUpData.put("password", this.password);
+		Map<String,String> signInData = new HashMap<>();
+		signInData.put("id", this.userId);
+		signInData.put("password", this.password);
 		
-		return userInfo.signUp(signUpData);
+		return userInfo.signIn(signInData);
 	}
+	
+	public void signUp(Map<String, Object> map) throws SQLException {
+		UserInfo userInfo = new UserInfo();
+		
+		userInfo.signUp(map);
+	}
+	
+
+	public void setMBTI(Map<String, String> map) { 
+		UserInfo userInfo = new UserInfo();
+		
+		userInfo.setMBTI(map);
+    }
 	
 }

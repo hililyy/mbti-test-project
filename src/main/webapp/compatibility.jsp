@@ -41,7 +41,7 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="./compatibilityData.js"></script>
+	<script src="./compatibilityData.js"></script>
 	<script>
       const selectValue = { from: null, to: null };
       let resultBox = null,
@@ -50,7 +50,6 @@
         resultImg = null;
       const initialize = () => {
         const selectBox = document.querySelectorAll('.mbti-select');
-        console.log(selectBox);
         selectBox.forEach((dom) => {
           mbti.forEach((item, idx) => {
             const option = document.createElement('option');

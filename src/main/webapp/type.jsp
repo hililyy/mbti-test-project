@@ -9,9 +9,6 @@ pageEncoding="UTF-8"%>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Sim Kong [유형보기]</title>
 	<link href="type.css" rel="stylesheet"/>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
 </head>
 <body class="background">
 <jsp:include page="header.jsp"></jsp:include>
@@ -25,7 +22,7 @@ pageEncoding="UTF-8"%>
 	    <tbody style="text-align:center;">
 	    <tr>
 	        <td colspan="6">
-	            <div><a title="분류:16가지 성격 유형">16가지 성격 유형</a></div>
+	            <div>🤍 원하는 유형을 클릭해보세요! 🤍</div>
 	        </td>
 	    </tr>
 	    <tr>

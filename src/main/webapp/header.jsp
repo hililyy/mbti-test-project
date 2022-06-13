@@ -19,12 +19,12 @@
             <header class="header-container">
                 <h1 class="header-logo">Sim Kong</h1>
 
-                <% if(login.signUp().getId()==null) {%>
+                <% if(login.signIn().getId()==null) {%>
                     <form method="post" name="home" class="header-container__menu-container">
                     <nav>
                         <div class="login-list">
                             <input type="button" name="Submit" value="로그인" onclick="location.href='login.jsp'">
-                            <input type="button" name="Submit" value="회원가입" onclick="location.href='signUp.jsp'">
+                            <input type="button" name="Submit" value="회원가입" onclick="location.href='signUpForm.jsp'">
                         </div>
                         </nav>
                     </form>
